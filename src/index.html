@@ -3,7 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Pink Lemonade Landing Page</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="../styles/style.css">
+	<script src="./script.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </head>
 <body>
 	<div class="main">
@@ -24,10 +26,11 @@
 				<p>...one bite at a time</p>
 			</div>
 			<form id="f1" name="f1" class="search">
-				<input type="text" name="t1" placeholder="Search recipes here..."
+				<input type="text" id="t1" name="t1" placeholder="Search recipes here..."
 				required="">
-				<input type="submit" name="b1" value="SEARCH" form="f1">
+				<input type="submit" name="b1" value="SEARCH" form="f1" onclick="getRecipe(document.getElementById('t1').value)">
 			</form>
+			
 		</div>
 	</div>
 </body>
