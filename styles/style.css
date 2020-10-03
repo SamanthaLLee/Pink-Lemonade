@@ -136,7 +136,7 @@ body{
 	outline:none;
 	border:none;
 }
-.main .info .search input[type="submit"]{
+.main .info .search input[type="button"]{
 	background:#eb4d4b;
 	border:none;
 	font-family:'Lato',sans-serif;
