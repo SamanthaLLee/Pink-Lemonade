@@ -1,12 +1,19 @@
 var response = [];
 var ingredients = [];
 var resultsToDisplay = [];
+
+//Food Conditions
 var goodFoods = ["Broccoli", "Cauliflower", "Kale", "Cabbage", "Brussel Sprouts", "Lettuce", "Spinach", "Swiss Chard", "Endives","Beet greens", "Romaine", "Turnip", "Kohlrabi", "Bok Choy",
 "Watercress", "Collards", "Kale", "Mustard Greens", "Rutabaga", "Celery", "Parsley", "Fennel", "Carrots", "Parsnip", "Garlic", "Onion", "Shallots", "Chives", "Leek", "Egglant",
 "Tomato", "Pumpkin", "Squah", "Cucumber", "Muskmelon", "Watermelon", "Broccoli Sprouts", "Mustard Greens", "Horseradish", "Potatos", "Apple", "Pear", "Arugula", "Oranges", "Grapefruit",
 "Lemons", "Limes", "Tangerines", "Strawberries", "Blueberries", "Peaches", "Fortified Soymilk", "Yogurt", "Lentils", "Poultry", "Soybeans", "Peas", "Chickpeas", "Lima Beans", "Peanut",
-"Carob", "Kidney Beans", "Mung beans", "Pinto Beans", "Black-eyed Peas"];
+"Carob", "Kidney Beans", "Mung beans", "Pinto Beans", "Black-eyed Peas", "Eggs", "Tofu", "Tempeh", "Edamame", "Wheat", "Rye", "Oats", "Rice", "Corn", "Bulgur", "Barley", "Green tea",
+"Kimchi", "Miso", "Sauerkraut", "Parsley", "Rosemary", "Thyme", "Tumeric", "Ginger", "Soy", "Ground Flaxseeds", "Salmon", "Mackerel", "Sardines", "Artic Char"];
 
+var badFoods = ["Cheeses", "Cream", "Butter", "Ice cream", "Beef", "Lamb", "Organ Meats", "Hydrogenated Oils", "Olive Oil", "Avocado", "Nuts", "Seeds", "Baked Goods", "Crackers",
+"Margarine", "Alcohol", "Hydrogenated Oils", "Sugary beverages", "Tobacco Smoke", "Artificial Sweetners", "Cider", "Spirits", "Molluscs", "Fried foods", "Fast Foods"]
+		
+		
 //Makes a call to the API with user's query, returns an array of recipes that match
 function getRecipe(q){
 	console.log(q);
