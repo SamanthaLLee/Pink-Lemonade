@@ -55,14 +55,14 @@ function rankResults(response){
 		// response[i].score = ingredObject.score;
 		response.results[i].score = getIngredients(response.results[i]);
 		//console.log();
-		console.log(response.results[i]);
-		resultsToDisplay.push(response[i]);
+		//console.log(response.results[i]);
+		resultsToDisplay.push(response.results[i]);
 	}
 	resultsToDisplay.sort(function(a,b) {
 		return b.score-a.score;
 	});
 	
-	//console.log(resultsToDisplay);
+	console.log(resultsToDisplay);
 	
 }
 
@@ -75,7 +75,7 @@ function getIngredients(recipe){
 	var questionableIngred = [];
 	var ingredientList = recipe.nutrition.ingredients;
 	for(var i = 0 in ingredientList){
-		console.log(ingredientList[i]);
+		//console.log(ingredientList[i]);
 		if(goodFoods.includes(ingredientList[i].name)){
 			score++;
 			//goodIngredients.push(ingredientList[i].name);
@@ -109,7 +109,7 @@ function getIngredients(recipe){
 		// master.push(badIngredients);
 		// master.push(questionableIngred);
 		
-		console.log(score);
+		//console.log(score);
 		
 		return score;
 }
