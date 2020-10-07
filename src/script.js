@@ -63,7 +63,7 @@ function rankResults(response){
 	});
 	
 	console.log(resultsToDisplay);
-	
+	displayResults(resultsToDisplay);
 }
 
 //Gets list of ingredients from a given recipe
@@ -115,6 +115,11 @@ function getIngredients(recipe){
 }
 
 //Displays results, post-pointing
-function displayResults(id){
-	//HTML modification to display resultsToDisplay
+function displayResults(resultsToDisplay){
+	var i=0;
+	var stop=5;
+	for (i=0;i<resultsToDisplay.length;i++) {  
+			var num = 1+i;
+		 document.getElementById("results").innerHTML += "<br>"+num+". <a href='"+resultsToDisplay[i].sourceUrl+"'>" +resultsToDisplay[i].title+"</a> (score: "+resultsToDisplay[i].score+")";
+	}
 }
