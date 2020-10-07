@@ -3,18 +3,17 @@ const ingredients = [];
 const resultsToDisplay = [];
 
 //Food Conditions
-const goodFoods = ["Broccoli", "Cauliflower", "Kale", "Cabbage", "Brussel Sprouts", "Lettuce", "Spinach", "Swiss Chard", "Endives","Beet greens", "Romaine", "Turnip", "Kohlrabi", "Bok Choy",
-"Watercress", "Collards", "Kale", "Mustard Greens", "Rutabaga", "Celery", "Parsley", "Fennel", "Carrots", "Parsnip", "Garlic", "Onion", "Shallots", "Chives", "Leek", "Eggplant",
-"Tomato", "Pumpkin", "Squash", "Cucumber", "Muskmelon", "Watermelon", "Broccoli Sprouts", "Mustard Greens", "Horseradish", "Potatoes", "Apple", "Pear", "Arugula", "Oranges", "Grapefruit",
-"Lemons", "Limes", "Tangerines", "Strawberries", "Blueberries", "Peaches", "Yogurt", "Lentils", "Poultry", "Peas", "Chickpeas", "Lima Beans", "Peanut",
-"Carob", "Kidney Beans", "Mung beans", "Pinto Beans", "Black-eyed Peas", "Eggs", "Tofu", "Tempeh", "Edamame", "Wheat", "Rye", "Oats", "Rice", "Corn", "Bulgur", "Barley", "Green tea",
-"Kimchi", "Miso", "Sauerkraut", "Parsley", "Rosemary", "Thyme", "Tumeric", "Ginger", "Ground Flaxseeds", "Salmon", "Mackerel", "Sardines", "Artic Char"];
+const goodFoods = ["broccoli", "cauliflower", "kale", "cabbage", "brussel sprouts", "lettuce", "spinach", "swiss chard", "endives","beet greens", "romaine", "turnip", "kohlrabi", "bok choy",
+"watercress", "collards", "kale", "mustard greens", "rutabaga", "celery", "parsley", "fennel", "carrots", "parsnip", "garlic", "onion", "shallots", "chives", "leek", "eggplant",
+"tomato", "pumpkin", "squash", "cucumber", "muskmelon", "watermelon", "broccoli sprouts", "mustard greens", "horseradish", "potatoes", "apple", "pear", "arugula", "oranges", "grapefruit",
+"lemons", "limes", "tangerines", "strawberries", "blueberries", "peaches", "yogurt", "lentils", "poultry", "peas", "chickpeas", "lima beans", "peanut",
+"carob", "kidney beans", "mung beans", "pinto beans", "black-eyed peas", "eggs", "tofu", "tempeh", "edamame", "wheat", "rye", "oats", "rice", "corn", "bulgur", "barley", "green tea",
+"kimchi", "miso", "sauerkraut", "parsley", "rosemary", "thyme", "tumeric", "ginger", "ground flaxseeds", "salmon", "mackerel", "sardines", "artic char"];
 
-const badFoods = ["Cheeses", "Cream", "Butter", "Ice cream", "Beef", "Lamb", "Organ Meats", "Hydrogenated Oils", "Olive Oil", "Avocado", "Nuts", "Seeds", "Baked Goods", "Crackers",
-"Margarine", "Alcohol", "Hydrogenated Oils", "Sugary beverages", "Tobacco Smoke", "Artificial Sweetners", "Cider", "Spirits", "Molluscs", "Fried foods", "Fast Foods"]
+const badFoods = ["cheeses", "cream", "butter", "ice cream", "beef", "lamb", "organ meats", "hydrogenated oils", "olive oil", "avocado", "nuts", "seeds", "baked goods", "crackers",
+"margarine", "alcohol", "hydrogenated oils", "sugary beverages", "tobacco smoke", "artificial sweetners", "cider", "spirits", "molluscs", "fried foods", "fast foods"]
 		
-const questionable = ["Soy","Soybeans", "Fortified Soymilk" ]
-		
+const questionable = ["soy","soybeans", "fortified soymilk" ];
 //Makes a call to the API with user's query, returns an array of recipes that match
 function getRecipe(q){
 	console.log(q);
@@ -23,7 +22,7 @@ function getRecipe(q){
 		url:"https://api.spoonacular.com/recipes/complexSearch?apiKey=99a01e3d7525405894929bfbec77ffa3&addRecipeInformation=true&addRecipeNutrition=true&number=10&query="+q,
 		success: function(res) {
 			response = res;
-			console.log(res.results);
+			//console.log(res.results);
 			rankResults(res);
 			//document.getElementById("output").innerHTML="<h1>"+res.results[0].title+"</h1><br><img src='"+res.results[0].image+"' width='400' /><br>Ready in "+res.results[0].readyInMinutes+" minutes"
 			//getSource(res.results[0].id);
@@ -50,23 +49,20 @@ function rankResults(response){
 	// go through each element in response, call getIngredients
 	// add recipe object WITH SCORE to resultsToDisplay
 	// sort resultsToDisplay based on score
-	
-	response.forEach(function(element) {
-  	element.score = 0;
-	})
 
-	for(var i = 0 in response){
+	for(var i = 0 in response.results){
 		// var ingredObject = getIngredients(response[i]);
 		// response[i].score = ingredObject.score;
-		response[i].score = getIngredients(response[i]);
+		response.results[i].score = getIngredients(response.results[i]);
+		//console.log();
+		console.log(response.results[i]);
 		resultsToDisplay.push(response[i]);
 	}
-
-	// resultsToDisplay.sort(function(a,b) {
-	// 	return b.score-a.score;
-	// });
+	resultsToDisplay.sort(function(a,b) {
+		return b.score-a.score;
+	});
 	
-	console.log(resultsToDisplay);
+	//console.log(resultsToDisplay);
 	
 }
 
@@ -77,19 +73,20 @@ function getIngredients(recipe){
 	var goodIngredients = [];
 	var badIngredients = [];
 	var questionableIngred = [];
-	var ingredientList = recipe.ingredients;
+	var ingredientList = recipe.nutrition.ingredients;
 	for(var i = 0 in ingredientList){
-		if(goodFoods.includes(ingredientList[i])){
+		console.log(ingredientList[i]);
+		if(goodFoods.includes(ingredientList[i].name)){
 			score++;
-			goodIngredients.push(ingredientList[i].name);
-		}else if(badFoods.includes(ingredientList[i])){
+			//goodIngredients.push(ingredientList[i].name);
+		}else if(badFoods.includes(ingredientList[i].name)){
 			score--;
-			badIngredients.push(ingredientList[i].name);
-		}else if(questionable.includes(ingredientList[i])){
-			questionableIngred.push(ingredientList[i].name);
+			//badIngredients.push(ingredientList[i].name);
+		}else if(questionable.includes(ingredientList[i].name)){
+			//questionableIngred.push(ingredientList[i].name);
 		}
-		
-		result.score = score;
+	}
+		//result.score = score;
 		// 
  		// var max = Math.max(goodIngredients.length,badIngredients.length,questionableIngred.length);
 		// 
@@ -115,7 +112,6 @@ function getIngredients(recipe){
 		console.log(score);
 		
 		return score;
-	}
 }
 
 //Displays results, post-pointing
