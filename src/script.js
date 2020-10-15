@@ -2,6 +2,8 @@ var response = [];
 const ingredients = [];
 const resultsToDisplay = [];
 
+var key = "";
+
 //Food Conditions
 const goodFoods = ["broccoli", "cauliflower", "kale", "cabbage", "brussel sprouts", "lettuce", "spinach", "swiss chard", "endives","beet greens", "romaine", "turnip", "kohlrabi", "bok choy",
 "watercress", "collards", "kale", "mustard greens", "rutabaga", "celery", "parsley", "fennel", "carrots", "parsnip", "garlic", "onion", "shallots", "chives", "leek", "eggplant",
